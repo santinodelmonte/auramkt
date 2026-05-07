@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto | AuraMKT – Agencia de Marketing Digital Montevideo</title>
+  <meta name="description" content="Contactá a AuraMKT para cotizar tu proyecto de marketing digital, diseño web, community management o software en Montevideo, Uruguay." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><img src="img/AuraLogo.jpg" alt="AuraMKT" /></a>
+      <div class="nav-links">
+        <a href="index.html">Inicio</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="sobre-nosotros.html">Nosotros</a>
+        <a href="contacto.html" class="active">Contacto</a>
+      </div>
+      <div class="nav-cta">
+        <a href="contacto.html" class="btn btn-primary btn-sm">Cotizá gratis</a>
+        <div class="nav-hamburger" id="hamburger">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="page-hero-content">
+      <p class="section-label" data-aos="fade-down">Estamos para vos</p>
+      <h1 data-aos="fade-up">Hablemos de tu<br><span style="color:var(--lime)">negocio</span></h1>
+      <p data-aos="fade-up" data-aos-delay="100">Contanos tu idea y te respondemos en menos de 24 horas.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section class="contact-main-section">
+    <div class="container">
+      <div class="contact-page-grid">
+
+        <!-- FORM -->
+        <div data-aos="fade-right">
+          <div class="contact-form">
+            <h2 style="font-size:2.4rem; margin-bottom:6px;">Envianos tu consulta</h2>
+            <p class="contact-form-sub">Completá el formulario y un asesor te contactará a la brevedad.</p>
+
+            <form id="contactForm" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="nombre">Nombre</label>
+                  <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" placeholder="tu@email.com" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="telefono">Teléfono (opcional)</label>
+                <input type="tel" id="telefono" name="telefono" placeholder="+598 9X XXX XXX" />
+              </div>
+              <div class="form-group">
+                <label for="servicio">Servicio de interés</label>
+                <select id="servicio" name="servicio" required>
+                  <option value="" disabled selected>Seleccioná un servicio</option>
+                  <option value="community-manager">Community Manager</option>
+                  <option value="asesores-estrategicos">Asesores Estratégicos</option>
+                  <option value="diseno-grafico">Diseño Gráfico</option>
+                  <option value="producciones">Producciones</option>
+                  <option value="diseno-web">Diseño Web</option>
+                  <option value="software-gestion">Software de Gestión</option>
+                  <option value="combo">Combo / Varios servicios</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="mensaje">Mensaje</label>
+                <textarea id="mensaje" name="mensaje" placeholder="Contanos sobre tu negocio, qué necesitás y cualquier detalle que creas importante..." required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-lg contact-submit-btn">
+                <i class="fas fa-paper-plane"></i>
+                Enviar consulta
+              </button>
+            </form>
+
+            <div id="formSuccess" class="contact-success">
+              <div class="contact-success-icon"><i class="fas fa-check"></i></div>
+              <h3>¡Mensaje enviado!</h3>
+              <p>Gracias por contactarnos. Te responderemos en menos de 24 horas a tu email.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- INFO PANEL -->
+        <div data-aos="fade-left">
+          <h2 style="font-size:2.8rem; margin-bottom:8px;">Info de contacto</h2>
+          <p class="contact-info-sub">
+            Atendemos clientes en todo el país y también trabajamos con marcas de la región.
+          </p>
+
+          <div class="contact-info-list">
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="fas fa-envelope"></i></div>
+              <div>
+                <h4>Email</h4>
+                <p><a href="mailto:auramkt.uy@gmail.com">auramkt.uy@gmail.com</a></p>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="fab fa-whatsapp"></i></div>
+              <div>
+                <h4>WhatsApp</h4>
+                <p><a href="https://wa.me/59892681102" target="_blank" rel="noopener">+598 92 681 102</a></p>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="fas fa-map-marker-alt"></i></div>
+              <div>
+                <h4>Ubicación</h4>
+                <p>Montevideo, Uruguay<br>Atendemos todo el país</p>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="fas fa-clock"></i></div>
+              <div>
+                <h4>Horario de atención</h4>
+                <p>Lunes a Sábados: 9:00 – 18:30<br>Respuesta email: &lt; 24 hs</p>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Socials -->
+          <div class="contact-social-row">
+            <a href="https://instagram.com/auramkt.uy" target="_blank" rel="noopener" class="contact-social-btn contact-social-ig">
+              <i class="fab fa-instagram"></i> @auramkt.uy
+            </a>
+            <a href="https://wa.me/59892681102" target="_blank" rel="noopener" class="contact-social-btn contact-social-wa">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section-contact">
+    <div class="container">
+      <p class="section-label text-center" data-aos="fade-down">Preguntas frecuentes</p>
+      <h2 class="section-title text-center" data-aos="fade-up">¿Tenés dudas? Las respondemos</h2>
+      <div class="faq-contact-grid">
+
+        <div class="faq-contact-item" data-aos="fade-up">
+          <h4>¿Cuánto cuesta un servicio AuraMKT?</h4>
+          <p>Cada proyecto es único. Ofrecemos planes adaptados a startups, pymes y empresas. Cotizamos sin compromiso dentro de las 24 hs de tu consulta.</p>
+        </div>
+        <div class="faq-contact-item" data-aos="fade-up" data-aos-delay="60">
+          <h4>¿Trabajan con empresas de todo Uruguay?</h4>
+          <p>Sí. Tenemos clientes en Montevideo, Canelones, Maldonado y otras ciudades. Trabajamos 100% remoto o en persona si estás en Montevideo.</p>
+        </div>
+        <div class="faq-contact-item" data-aos="fade-up" data-aos-delay="120">
+          <h4>¿Puedo contratar más de un servicio?</h4>
+          <p>¡Por supuesto! Nuestros combos integran community management, diseño, web y software para una estrategia digital coherente y más económica.</p>
+        </div>
+        <div class="faq-contact-item" data-aos="fade-up" data-aos-delay="180">
+          <h4>¿Cuánto tarda en verse resultados?</h4>
+          <p>Depende del servicio: las redes sociales suelen mostrar mejoras en 60–90 días. Un sitio web se entrega en 3–6 semanas. Te damos un cronograma claro desde el inicio.</p>
+        </div>
+        <div class="faq-contact-item" data-aos="fade-up" data-aos-delay="240">
+          <h4>¿Cómo es el proceso de trabajo?</h4>
+          <p>Reunión de descubrimiento → propuesta personalizada → aprobación → ejecución → seguimiento mensual. Siempre con comunicación directa y reportes claros.</p>
+        </div>
+        <div class="faq-contact-item" data-aos="fade-up" data-aos-delay="300">
+          <h4>¿Aceptan empresas que recién empiezan?</h4>
+          <p>Sí, y nos encanta acompañar emprendimientos desde cero. Tenemos paquetes de inicio pensados para negocios que quieren construir su presencia digital.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo" style="display:inline-block; margin-bottom:16px;">
+            <img src="img/AuraLogo.jpg" alt="AuraMKT" class="footer-logo-img" />
+          </a>
+          <p>Agencia de marketing digital en Montevideo, Uruguay. Impulsamos marcas con creatividad, tecnología y estrategia.</p>
+          <div class="footer-socials">
+            <a href="https://instagram.com/auramkt.uy" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/59892681102" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="mailto:auramkt.uy@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="community-manager.html">Community Manager</a></li>
+            <li><a href="asesores-estrategicos.html">Asesores Estratégicos</a></li>
+            <li><a href="diseno-grafico.html">Diseño Gráfico</a></li>
+            <li><a href="producciones.html">Producciones</a></li>
+            <li><a href="diseno-web.html">Diseño Web</a></li>
+            <li><a href="software-gestion.html">Software de Gestión</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Agencia</h4>
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="sobre-nosotros.html">Sobre nosotros</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="mailto:auramkt.uy@gmail.com"><i class="fas fa-envelope" style="margin-right:6px"></i>auramkt.uy@gmail.com</a></li>
+            <li><a href="https://wa.me/59892681102" target="_blank" rel="noopener"><i class="fab fa-whatsapp" style="margin-right:6px"></i>+598 92 681 102</a></li>
+            <li><span style="color:rgba(255,255,255,.35); font-size:.875rem;"><i class="fas fa-map-marker-alt" style="margin-right:6px"></i>Montevideo, Uruguay</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 AuraMKT. Todos los derechos reservados. Hecho con <span style="color:var(--lime)">♥</span> en Montevideo.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp float -->
+  <a href="https://wa.me/59892681102" class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
