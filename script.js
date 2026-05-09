@@ -10,14 +10,22 @@ window.addEventListener('scroll', () => {
 });
 
 // ---- Mobile nav ----
-const hamburger    = document.getElementById('hamburger');
-const mobileNav    = document.getElementById('mobileNav');
-const mobileClose  = document.getElementById('mobileNavClose');
-const navOverlay   = document.getElementById('navOverlay');
+const hamburger   = document.getElementById('hamburger');
+const mobileNav   = document.getElementById('mobileNav');
+const mobileClose = document.getElementById('mobileNavClose');
+
+// Crear overlay dinámicamente si no existe en el HTML
+let navOverlay = document.getElementById('navOverlay');
+if (!navOverlay) {
+  navOverlay = document.createElement('div');
+  navOverlay.className = 'nav-overlay';
+  navOverlay.id = 'navOverlay';
+  document.body.appendChild(navOverlay);
+}
 
 function openMobileNav() {
   mobileNav?.classList.add('open');
-  navOverlay?.classList.add('active');
+  navOverlay.classList.add('active');
   hamburger?.classList.add('active');
   document.body.style.overflow = 'hidden';
   mobileNav?.setAttribute('aria-hidden', 'false');
@@ -25,15 +33,23 @@ function openMobileNav() {
 
 function closeMobileNav() {
   mobileNav?.classList.remove('open');
-  navOverlay?.classList.remove('active');
+  navOverlay.classList.remove('active');
   hamburger?.classList.remove('active');
   document.body.style.overflow = '';
   mobileNav?.setAttribute('aria-hidden', 'true');
 }
 
-hamburger?.addEventListener('click', openMobileNav);
+function toggleMobileNav() {
+  if (mobileNav?.classList.contains('open')) {
+    closeMobileNav();
+  } else {
+    openMobileNav();
+  }
+}
+
+hamburger?.addEventListener('click', toggleMobileNav);
 mobileClose?.addEventListener('click', closeMobileNav);
-navOverlay?.addEventListener('click', closeMobileNav);
+navOverlay.addEventListener('click', closeMobileNav);
 
 // Cerrar al hacer click en cualquier link
 mobileNav?.querySelectorAll('a').forEach(a => {
@@ -150,29 +166,96 @@ function closeModal() {
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
 // ---- Contact form ----
+// EmailJS Configuration
+// IMPORTANTE: Reemplazá estos valores con tus credenciales de EmailJS
+const EMAILJS_CONFIG = {
+  serviceID: 'TU_SERVICE_ID',      // Obtener de https://dashboard.emailjs.com/admin
+  templateID: 'TU_TEMPLATE_ID',    // Obtener de https://dashboard.emailjs.com/admin/templates
+  publicKey: 'TU_PUBLIC_KEY'       // Obtener de https://dashboard.emailjs.com/admin/account
+};
+
+// Inicializar EmailJS
+if (typeof emailjs !== 'undefined') {
+  emailjs.init(EMAILJS_CONFIG.publicKey);
+}
+
 const contactForm = document.getElementById('contactForm');
 contactForm?.addEventListener('submit', async (e) => {
   e.preventDefault();
+  
   const btn = contactForm.querySelector('button[type="submit"]');
-  btn.textContent = 'Enviando...';
+  const btnOriginalText = btn.innerHTML;
+  
+  // Validación básica
+  const nombre = document.getElementById('nombre').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const servicio = document.getElementById('servicio').value;
+  const mensaje = document.getElementById('mensaje').value.trim();
+  
+  if (!nombre || !email || !servicio || !mensaje) {
+    alert('Por favor completá todos los campos obligatorios.');
+    return;
+  }
+  
+  // Validar email
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    alert('Por favor ingresá un email válido.');
+    return;
+  }
+  
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
   btn.disabled = true;
-
-  // Simulate send (replace with EmailJS)
-  await new Promise(r => setTimeout(r, 1500));
-
-  const successMsg = document.getElementById('formSuccess');
-  if (successMsg) {
-    contactForm.style.display = 'none';
-    successMsg.style.display = 'block';
-  } else {
-    btn.textContent = '¡Mensaje enviado!';
-    btn.style.background = '#10B981';
-    setTimeout(() => {
-      btn.textContent = 'Enviar mensaje';
-      btn.disabled = false;
-      btn.style.background = '';
-      contactForm.reset();
-    }, 3000);
+  
+  try {
+    // Verificar que EmailJS esté cargado
+    if (typeof emailjs === 'undefined') {
+      throw new Error('EmailJS no está cargado correctamente');
+    }
+    
+    // Preparar los parámetros del template
+    const templateParams = {
+      from_name: nombre,
+      from_email: email,
+      phone: document.getElementById('telefono').value || 'No proporcionado',
+      service: servicio,
+      message: mensaje,
+      to_email: 'auramkt.uy@gmail.com' // Email de destino (AuraMKT)
+    };
+    
+    // Enviar email usando EmailJS
+    const response = await emailjs.send(
+      EMAILJS_CONFIG.serviceID,
+      EMAILJS_CONFIG.templateID,
+      templateParams
+    );
+    
+    console.log('Email enviado exitosamente:', response);
+    
+    // Mostrar mensaje de éxito
+    const successMsg = document.getElementById('formSuccess');
+    if (successMsg) {
+      contactForm.style.display = 'none';
+      successMsg.style.display = 'block';
+    } else {
+      btn.innerHTML = '<i class="fas fa-check"></i> ¡Mensaje enviado!';
+      btn.style.background = '#10B981';
+      setTimeout(() => {
+        btn.innerHTML = btnOriginalText;
+        btn.disabled = false;
+        btn.style.background = '';
+        contactForm.reset();
+      }, 3000);
+    }
+    
+  } catch (error) {
+    console.error('Error al enviar el email:', error);
+    
+    // Mostrar error al usuario
+    btn.innerHTML = btnOriginalText;
+    btn.disabled = false;
+    
+    alert('Hubo un error al enviar el mensaje. Por favor intentá nuevamente o contactanos por WhatsApp.');
   }
 });
 
