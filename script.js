@@ -274,3 +274,157 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 const style = document.createElement('style');
 style.textContent = `@keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }`;
 document.head.appendChild(style);
+
+/* ===========================
+   COMMUNITY MANAGER MODALS
+   =========================== */
+
+function openCMModal(id) {
+  const modal = document.getElementById(id);
+
+  if (!modal) return;
+
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCMModal(event, id) {
+
+  if (event && event.target !== document.getElementById(id)) {
+    return;
+  }
+
+  const modal = document.getElementById(id);
+
+  if (!modal) return;
+
+  modal.style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+// Flip mobile
+if (window.innerWidth < 992) {
+
+  document.querySelectorAll('.cm-card').forEach(card => {
+
+    card.addEventListener('touchstart', function() {
+      this.classList.toggle('active');
+    });
+
+  });
+
+}
+
+// Escape
+document.addEventListener('keydown', function(e) {
+
+  if (e.key === 'Escape') {
+
+    ['cmModal1', 'cmModal2', 'cmModal3'].forEach(function(id) {
+
+      const modal = document.getElementById(id);
+
+      if (modal && modal.style.display === 'flex') {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+
+    });
+
+  }
+
+});
+/* ===========================
+   CLIENTS LOGO CAROUSEL
+   Duplica los items con JS para
+   que el loop sea continuo y solo
+   cargue cada imagen una vez.
+   =========================== */
+
+(function () {
+  const track = document.getElementById('clientsTrack');
+  if (!track) return;
+
+  const wrapper = track.parentElement;
+  const SPEED = 0.6; // px por frame — ajustar para más rápido/lento
+
+  // 1. Esperar a que todas las imágenes carguen para medir correctamente
+  const images = Array.from(track.querySelectorAll('img'));
+  let loaded = 0;
+
+  function init() {
+    // 2. Clonar el set original las veces necesarias para cubrir al menos
+    //    el doble del ancho del wrapper (garantiza que siempre haya logos visibles)
+    const originalItems = Array.from(track.children);
+    const originalWidth = track.scrollWidth;
+    const wrapperWidth = wrapper.offsetWidth;
+
+    const clonesNeeded = Math.ceil((wrapperWidth * 2) / originalWidth) + 1;
+
+    for (let i = 0; i < clonesNeeded; i++) {
+      originalItems.forEach(function (item) {
+        const clone = item.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        track.appendChild(clone);
+      });
+    }
+
+    // 3. Guardar el ancho del set original (punto de reset)
+    const loopWidth = originalWidth;
+
+    let currentX = 0;
+    let paused = false;
+    let rafId = null;
+
+    wrapper.addEventListener('mouseenter', function () { paused = true; });
+    wrapper.addEventListener('mouseleave', function () { paused = false; });
+
+    // Respetar preferencia de movimiento reducido
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    function tick() {
+      if (!paused) {
+        currentX -= SPEED;
+        // Cuando el desplazamiento supera el ancho del set original → reset instantáneo
+        if (Math.abs(currentX) >= loopWidth) {
+          currentX = 0;
+        }
+        track.style.transform = 'translateX(' + currentX + 'px)';
+      }
+      rafId = requestAnimationFrame(tick);
+    }
+
+    rafId = requestAnimationFrame(tick);
+
+    // Pausar cuando la pestaña no está visible para ahorrar recursos
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        cancelAnimationFrame(rafId);
+      } else {
+        rafId = requestAnimationFrame(tick);
+      }
+    });
+  }
+
+  // Esperar a que carguen las imágenes antes de medir anchos
+  if (images.length === 0) {
+    init();
+  } else {
+    images.forEach(function (img) {
+      if (img.complete) {
+        loaded++;
+        if (loaded === images.length) init();
+      } else {
+        img.addEventListener('load', function () {
+          loaded++;
+          if (loaded === images.length) init();
+        });
+        img.addEventListener('error', function () {
+          loaded++;
+          if (loaded === images.length) init();
+        });
+      }
+    });
+  }
+})();
